@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>구구단</title>
+</head>
+<body>
+    <script>
+        
+
+         
+        
+        while(1){
+            var num01 =Math.floor((Math.random()*9)+1); //1~9사이의 랜덤값
+            var num02 =Math.floor((Math.random()*9)+1); //1~9사이의 랜덤값
+            var ave = num01 * num02;
+            var con = true;
+
+            while(con){
+                var q = prompt(num01 + '*' + num02 + '= ?'); // q에 입력받은값
+                if(q == ave){
+                    //reset
+                    alert('정답');
+                    con = false; //조건이 맞으면 반복문에서 빠져나와 새로운 num값으로 갱신
+                }
+                else{
+                    alert('오답');
+                }
+            }
+            
+
+            
+        }
+        
+        
+
+
+    </script>
+</body>
+</html>

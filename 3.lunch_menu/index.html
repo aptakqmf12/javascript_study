@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Lunch_menu</title>
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
     <style>
         *{margin:0; padding:0; list-style: none; text-decoration: none;}
         .wrap{max-width:200px; width:100%;  margin: 0 auto; overflow: hidden;}
         .wrap::after{content:""; display: block; clear:both;}
+
         section{height: 100vh;     background: linear-gradient(0deg, #17EAD9, #6078EA);}
+
+        section .new_menu{}
+
         section .category{ display: table; table-layout: fixed; width:100% }
         section .category li{ display: table-cell; }
         section .category li button{width:100%; height: 100%; margin: 10px 0; min-height: 50px; border:none; background-color: #1034ce;color: white; border-radius: 30px; font-size: 1.3rem;}
@@ -21,6 +26,10 @@
 
     <section>
         <div class="wrap">
+
+            <input type="text" class="new_menu">
+            <button type="submit" class="add_menu">추가하기</button>
+
             <ul class="category">
                 <li><button>click</button></li>
             </ul>
@@ -32,7 +41,39 @@
       </section>
 
     <script>
-        
+        var list = [];
+        var list_length;
+        var index;
+        var new_menu;
+
+        $('.add_menu').on('click',function(){
+            new_menu = $('.new_menu').val();
+            list.push(new_menu);
+            list_length  = list.length;
+            alert(new_menu + '를 추가하였습니다');
+            /*
+            for(var i; i<list_length; i++){
+                if(new_menu == list[i]){
+                    alert('이미 리스트에 있는 맛집입니다');
+                }
+                else{
+                    alert(new_menu + '를 추가하였습니다.');
+                }
+            }
+            */
+            
+        });
+
+        $('.category li button').on('click',function(){
+            if(list_length === undefined){
+                alert('맛집을 추가해주세요');
+            }
+            else{
+                var ran =parseInt((Math.random() * list_length ) )  ; // 1 ~ list길이
+                index = $(this).closest('li').index();
+                $('.menu').html('오늘은 ' + list[ran] + '갑시다');
+            }
+        });
     </script>
 </body>
 </html>

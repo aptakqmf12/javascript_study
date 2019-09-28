@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div>text</div>
+    
+    <script>
+        var word = '마시멜로';
+
+        while(true){
+            var newWord = prompt(word);
+
+            if(newWord.length == 3){
+                if(word[word.length -1] == newWord[0]){
+                    word = newWord; 
+                }
+                else{
+                    alert('첫글자가 다릅니다')
+                }   
+            }
+            else{
+                alert('3자리이하의 문자를 입력해주세요');
+            }
+  
+        }
+
+        /*
+        for(var i; true;){
+            var newWord = prompt(word);
+            if(word[word.length -1] == newWord[0]){
+                word = newWord; 
+            }
+            else{
+                alert('첫글자가 다릅니다')
+            }
+        }
+        */
+    </script>
+</body>
+</html>

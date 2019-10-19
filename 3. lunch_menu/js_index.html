@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lunch_menu</title>
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+    <style>
+        *{margin:0; padding:0; list-style: none; text-decoration: none;}
+        .wrap{max-width:300px; width:100%;  margin: 0 auto; overflow: hidden; text-align:center;}
+        .wrap::after{content:""; display: block; clear:both;}
+
+        section{height: 100vh;  background: linear-gradient(0deg, #17EAD9, #6078EA); display:flex; justify-content: center; align-items: center; }
+
+        section input#new_menu{ padding: 5px;}
+        section button.add_menu{border:none; background-color:white; width:80px; height: 30px; border-radius: 10px;}
+        section .roulette{ display: table; table-layout: fixed; width:100% }
+        section .roulette li{ display: table-cell; }
+        section .roulette li button{width:100%; height: 100%; margin: 10px 0; min-height: 50px; border:none; background-color: #1034ce;color: white; border-radius: 30px; font-size: 1.3rem; cursor:pointer}
+        section .menu{background-color:white; width: 100%; text-align: center; margin: 10px auto;  padding:10px; border-top:3px gray solid;}
+        section .menu_list li:first-child{font-weight:bold;}
+
+        #popup{position: absolute; width:100%; height:100%; background-color:rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; display: none;}
+        #popup .popup_list{width:50%; height:50%; border-radius: 30px;; background-color: #fff; text-align: center; vertical-align: middle; display: flex; justify-content: center; align-items:center; box-shadow:10px 10px 20px #333;}
+        #popup .popup_list>li{ font-size:3em; position:absolute; }
+
+    </style>
+
+    <div id="popup">
+      <ul class="popup_list">  
+      </ul>
+      
+    </div>
+
+    <section>
+      <div class="wrap">
+        <form action="" id="form">
+            <input type="text" id="new_menu">
+            <button type="submit" class="add_menu">추가하기</button>
+        </form>
+          
+
+          <ul class="roulette">
+              <li><button>click</button></li>
+          </ul>
+      
+          <div class="menu">
+              오늘메뉴는?
+          </div>
+          <ul class="menu_list">
+              <li>*헌재 메뉴 리스트*</li>
+          </ul>
+      </div>
+    </section>
+
+    <script>
+        var form = document.getElementById('form');
+        var new_menu = document.getElementById('new_menu');
+        var add_menu = document.getElementsByClassName('add_menu')[0];
+        var roulette = document.querySelector('.roulette').children[0].children[0]; //최하위 자식 찾기?
+        var menu = document.querySelector('.menu');
+        var list = document.getElementsByClassName('menu_list')[0];
+        var menu_list = new Array();
+        var popup = document.getElementById('popup');
+
+        form.addEventListener('submit',function(e){ //리스트에 맛집추가
+          e.preventDefault();
+          
+          var a = new_menu.value;
+          if(a != undefined && a != ""){
+            menu_list.push(a);
+            alert( a + '를 추가하였습니다');
+
+            list.append(a + ' ')
+
+            //팝업창에 li추가
+           var pop_list = document.createElement('li');
+           pop_list.appendChild(document.createTextNode(a));
+           pop_list.style.color = "#" + Math.round(Math.random() * 0xffffff).toString(16); //랜덤색상
+            popup.childNodes[1].appendChild(pop_list);
+
+            new_menu.value = "";
+            new_menu.focus();
+          }
+          else{
+            alert('메뉴를 입력해주세요');
+          } 
+        });
+
+        roulette.addEventListener('click',function(){ //룰렛 돌리기
+          var selected_menu = menu_list[random()];
+          if(menu_list.length < 2){
+            alert('메뉴를 2개이상 추가해주세요');
+          }
+          else{   
+            //룰렛을 눌렸고, 메뉴가 2개이상있을때 -> 팝업창을 띄워준다
+            popup.style.display = 'flex';
+
+            menu.textContent = '오늘 메뉴는 ' + selected_menu + '입니다!';
+          }
+        });
+
+        function random(){
+          return Math.ceil(Math.random() * menu_list.length ) -1;
+        }      
+        
+    </script>
+</body>
+</html>

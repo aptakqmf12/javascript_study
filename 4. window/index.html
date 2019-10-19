@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        var word = '제로초';
+        while(1){
+            var answer = prompt(word);
+            if(word[word.length-1] == answer[0] ){
+                alert('정답')
+                var 바디 = document.body;
+                var 단어 = document.createElement('div');
+                단어.textContent = '정답단어'
+                document.body.append(단어);
+                word = answer;
+            } 
+            else{
+                alert('떙')
+            }
+        }
+        */
+
+        var text = document.createElement('div');
+        text.textContent = '제로초';
+        document.body.append(text);
+
+        var form = document.createElement('form');
+        document.body.append(form);
+
+        var input = document.createElement('input');
+        text.textContent = '입력해주세요';
+        form.append(text);
+
+        var btn = document.createElement('button');
+        text.textContent = '클릭!';
+        form.append(text);
+        
+    </script>
+</body>
+</html>

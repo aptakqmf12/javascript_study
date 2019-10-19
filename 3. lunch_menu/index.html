@@ -10,13 +10,12 @@
 <body>
     <style>
         *{margin:0; padding:0; list-style: none; text-decoration: none;}
-        .wrap{max-width:200px; width:100%;  margin: 0 auto; overflow: hidden;}
+        .wrap{max-width:300px; width:100%;  margin: 0 auto; overflow: hidden;}
         .wrap::after{content:""; display: block; clear:both;}
 
-        section{height: 100vh;     background: linear-gradient(0deg, #17EAD9, #6078EA);}
-
-        section .new_menu{}
-
+        section{height: 100vh;  background: linear-gradient(0deg, #17EAD9, #6078EA);}
+        section input.new_menu{ padding: 5px;}
+        section button.add_menu{border:none; background-color:white; width:80px; height: 30px; border-radius: 10px;}
         section .category{ display: table; table-layout: fixed; width:100% }
         section .category li{ display: table-cell; }
         section .category li button{width:100%; height: 100%; margin: 10px 0; min-height: 50px; border:none; background-color: #1034ce;color: white; border-radius: 30px; font-size: 1.3rem;}
@@ -26,7 +25,6 @@
 
     <section>
         <div class="wrap">
-
             <input type="text" class="new_menu">
             <button type="submit" class="add_menu">추가하기</button>
 
@@ -47,24 +45,19 @@
         var new_menu;
 
         $('.add_menu').on('click',function(){
-            new_menu = $('.new_menu').val();
-            list.push(new_menu);
-            list_length  = list.length;
-            alert(new_menu + '를 추가하였습니다');
-            /*
-            for(var i; i<list_length; i++){
-                if(new_menu == list[i]){
-                    alert('이미 리스트에 있는 맛집입니다');
-                }
-                else{
-                    alert(new_menu + '를 추가하였습니다.');
-                }
+            if( $('.new_menu').val() === '' ){
+                alert('제대로 입력해주세요');
             }
-            */
-            
+            else{
+                new_menu = $('.new_menu').val(); //클릭했을때 입력값을 대입
+                alert(new_menu + '를 추가하였습니다');
+                list.push(new_menu); 
+            }
+            new_menu = $('.new_menu').val('');
         });
 
         $('.category li button').on('click',function(){
+            list_length  = list.length;
             if(list_length === undefined){
                 alert('맛집을 추가해주세요');
             }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1 id="title">n스트라이크 n볼입니다!</h1>
+
+        <div id="text_box"></div>
+        <form action="" id="form">
+            <input type="text" id="input">
+            <button type="submit" id="btn">입력</button>
+        </form>
+        <br>
+        <div id="answer_box">4개의 숫자를 입력해주세요</div>
+        
+    </div>
+
+    <script>
+        var title = document.getElementById('title');
+        var text_box = document.getElementById('text_box');
+        var answer_box = document.getElementById('answer_box');
+        var form = document.getElementById('form');
+        var input = document.getElementById('input');
+        var btn = document.getElementById('btn');
+        var arr = new Array;
+        var com_arr = new Array;
+        
+
+        //비교배열 값정하기
+        for(var i=0; i<4;i++ ){
+            var random = Math.ceil(Math.random() * 9);
+            arr.push(random);
+            text_box.textContent = '비교배열은"' + arr + '"입니다';
+        }
+        
+        //Input창에 입력시
+        form.addEventListener('submit',function(e){
+            e.preventDefault();
+            com_arr = input.value;
+            
+            if(com_arr != '' && com_arr.length == 4){
+                answer_box.textContent = '입력배열은"' + com_arr.split('') + '"입니다';
+            }
+            else{
+                alert('4개의 숫자를 입력해주세요')
+                answer_box.textContent = '4개의 숫자를 입력해주세요'
+            }
+            input.focus();
+            input.value = '';
+
+            //두 배열을 비교하기
+            var strike=0;
+            var ball=0;
+
+            for(var i=0; i<4;i++){
+                if(arr[i] == com_arr.split('')[i]){
+                    strike++;
+                }
+                else if(arr.indexOf(Number(com_arr.split('')[i])) >-1  ){
+                    ball++;
+                }
+            }
+
+            title.textContent = strike + '스트라이크 ' + ball + '볼입니다'
+           
+        });
+
+
+        
+    
+        
+        
+    </script>
+</body>
+</html>

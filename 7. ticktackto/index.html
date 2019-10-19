@@ -13,6 +13,9 @@
 
     <script>
 
+        const fx = (selector) => document.querySelector(selector);
+        fx('body').st
+
         var body = document.body;
         var table = document.createElement('table');
         var arrays = [];
@@ -37,12 +40,12 @@
             if( rows[click_col][click_row].textContent == "" ){
                 //채우기
                 if(fill_text == 'X'){
-                    fill_text =='O';
                     rows[click_col][click_row].textContent = fill_text;
+                    fill_text ='O';
                 }
                 else{
-                    fill_text =='X';
                     rows[click_col][click_row].textContent = fill_text;
+                    fill_text ='X';
                 }
             }
             else{

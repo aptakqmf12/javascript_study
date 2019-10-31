@@ -30,7 +30,7 @@
 
             console.log(e.target.parentNode)
             
-            var click_col = cols.indexOf(e.target.parentNode); //클릭된 td의 tr을저장
+            var click_col = cols.indexOf(e.target.parentNode); //클릭된 td의 tr의 인덱스번호를 저장
 
             //indexOf(e.target.parentNode) = tr의 위치값 0,1,2
             //rows[click_col].indexOf(e.target); = rows[위 tr의 위치값]
@@ -50,6 +50,39 @@
             }
             else{
                 alert('이미 채워지 칸입니다.')
+            }
+
+
+
+            // 조건문이 어려우ㅝ어오오
+            var end_game = false;
+
+            if(
+                //가로줄이 같을때
+                rows[click_col][0].textContent === fill_text &&
+                rows[click_col][1].textContent === fill_text &&
+                rows[click_col][2].textContent === fill_text
+            ){
+                end_game = true;
+            }
+            else if(
+                //세로줄이 같을때
+                rows[0][click_row].textContent === fill_text &&
+                rows[1][click_row].textContent === fill_text &&
+                rows[2][click_row].textContent === fill_text 
+            ){
+                end_game = true;
+            }
+            else if(click_col === click_row && rows[click_col][click_row] === 'X'){
+                end_game = true;
+            }
+
+
+
+            console.log('end_game = ' + end_game);
+
+            if(end_game){
+                alert('게임종료');
             }
         }
 

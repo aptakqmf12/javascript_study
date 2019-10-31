@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul id="lotto"></ul>
+
+    <script>
+        /*
+        fill.forEach(function(e,index){
+            fill[index] = index + 1;
+        });
+        */
+
+        // 1~45 배열만들기
+        var arr = Array(45).fill().map(function(e,index){
+            return index + 1;
+        });
+
+        /*1~45인데 랜덤정렬인 배열 만들기*/
+        var shuffle = [];
+        while(arr.length > 0){
+            var random = arr.splice(Math.floor(Math.random()*arr.length), 1 )[0];
+            shuffle.push(random);
+        }
+        /*로또배열과 보너스값 구하기*/
+        var bonus, lotto;
+        lotto = shuffle.slice(0,6).sort(function(p,c){ return p-c; });
+        bonus = shuffle[shuffle.length-1];
+
+         /*ball만드는 함수*/
+         function make_ball(text,htmlTag){
+            var ball = document.createElement('li');
+            ball.textContent = text;
+            htmlTag.appendChild(ball);
+
+            //배경색지정
+            var ball_color;
+            if(text<10){
+                ball_color = 'red';
+            }else if(text<=20){
+                ball_color = 'orange';
+            }
+            else if(text<=30){
+                ball_color = 'yellow';
+            }
+            else if(text<=40){
+                ball_color = 'blue';
+            }
+            else{
+                ball_color = 'green';
+            }
+            ball.style.backgroundColor = ball_color;
+
+            //선택자값부여
+            ball.className = 'ball' + text ;
+           
+        }
+
+        /*HTML의 태그에 값뿌리기*/
+        var lotto_div = document.getElementById('lotto');
+
+        for(var i=0; i<lotto.length ; i++ ){
+            //여기에 setTimeout을 쓰면 클로저개념떄문에 지연이 일어나지않음(반복문안의 setTimeout이 문제인듯?.
+            make_ball(lotto[i],lotto_div);
+        }
+        
+        /* setTimeout을 이용한 지연*/
+        setTimeout(function(){
+            
+            make_ball(bonus,lotto_div);
+            lotto_div.lastChild.style.fontWeight = 'bold';
+            lotto_div.lastChild.style.marginLeft = '10px';
+        },1000);
+        
+       /*getElement~ 랑 queryselector는 html태그랑 nodeList의 차이? 임*/
+
+    </script>
+
+    <style>
+        #lotto{ list-style: none; display: table;}
+        #lotto li{display: table-cell; padding:10px;  width: 20px; height: 20px; border-radius: 20px; text-align: center;;}
+    </style>
+</body>
+</html>

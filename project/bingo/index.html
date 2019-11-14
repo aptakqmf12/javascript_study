@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <table class="fruit">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <script>
+        const $ = (selector) => document.querySelector(selector);
+        //nodeList라 push불가.. > 배열로 가져오는법을 찾자
+        var fruit_td =  document.querySelectorAll('.fruit tr td');
+        var fruit_arr = [1,2,3,4,5,6,7,8,9];
+
+        fruit_arr.forEach(function(e){
+            fruit_td.push(e);
+        });
+
+    </script>    
+</body>
+</html>

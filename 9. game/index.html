@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>가위바위보</title>
+</head>
+<body>
+    <style>
+        #computer{width:100px; height: 180px;}
+    </style>
+
+    <div id="computer"></div>
+    <div>
+        <button id="scissor" class="btn">가위</button>
+        <button id="rock" class="btn">바위</button>
+        <button id="paper" class="btn">보</button>
+    </div>
+
+    <script>
+
+        var img_position = '0';
+        var obj = {
+            가위 : '0',
+            바위 : '-100px',
+            보 : '-200px'
+        };
+
+        // Object.entries는 obj를 이차원배열로 만들어주는것이고, Object.entries().
+        // find(find도 반복문으로 취급)는  반복문돌다가 return이 true가 되는게나오면 stop.
+        function computer_choice(img_position){
+            return Object.entries(obj).find(function(v){
+                return v[1] == img_position;
+            })[0];
+        }
+
+        var interval;
+        function interval_maker(){
+            interval = setInterval(function(){
+                if(img_position == obj.가위 ){
+                    img_position = obj.바위;
+                }
+                else if(img_position == obj.바위){
+                    img_position = obj.보;
+                }
+                else{
+                    img_position = obj.가위;
+                }
+                document.getElementById('computer').style.background = 'url(images/image.png)' + img_position;
+
+            },200);
+        } 
+
+        //얘는 왜?
+        interval_maker();
+
+        var score = {
+            가위:1,
+            바위:0,
+            보:-1
+        }
+
+        document.querySelectorAll('.btn').forEach(function(btn){
+            btn.addEventListener('click',function(){
+                var my_choice = this.textContent;
+                console.log(my_choice, computer_choice(img_position));
+                clearInterval(interval);
+                setTimeout(function(){
+                    interval_maker();
+                },2000);
+
+                var my_score = score[my_choice];
+                var computer_score = score[computer_choice(img_position)];
+
+                if(my_score - computer_score == 0){
+                    alert('비겼습니다');
+                }
+                //배열.includes(조건) == 조건이 배열값을 가지면????
+                else if( [-1,2].includes(my_score - computer_score) ){
+                    alert('이겼습니다');
+                }
+                else{
+                    alert('졌습니다');
+                }
+
+            });
+        });
+
+    </script>
+    
+</body>
+</html>

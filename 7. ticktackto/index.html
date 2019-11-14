@@ -41,10 +41,12 @@
                 //채우기
                 if(fill_text == 'X'){
                     rows[click_col][click_row].textContent = fill_text;
+                    compare_txt();
                     fill_text ='O';
                 }
                 else{
                     rows[click_col][click_row].textContent = fill_text;
+                    compare_txt();
                     fill_text ='X';
                 }
             }
@@ -53,37 +55,52 @@
             }
 
 
+            function compare_txt(){
+                var end_game = false;
 
-            // 조건문이 어려우ㅝ어오오
-            var end_game = false;
+                if(
+                    //가로줄이 같을때
+                    rows[click_col][0].textContent === fill_text &&
+                    rows[click_col][1].textContent === fill_text &&
+                    rows[click_col][2].textContent === fill_text
+                    ){
+                        end_game = true;
+                        alert(fill_text + '님이 가로 승리하였습니다')
+                    }
+                    else if(
+                        //세로줄이 같을때
+                        rows[0][click_row].textContent === fill_text &&
+                        rows[1][click_row].textContent === fill_text &&
+                        rows[2][click_row].textContent === fill_text 
+                    ){
+                        end_game = true;
+                        alert(fill_text + '님이 세로 승리하였습니다')
+                    }
+                    /* 대각선일때*/
+                    else if(click_col === click_row){
+                        if(
+                            rows[0][0].textContent === fill_text &&
+                            rows[1][1].textContent === fill_text &&
+                            rows[2][2].textContent === fill_text
+                        ){
+                            end_game = true;
+                           alert(fill_text + '님이 좌>우 대각선 승리하였습니다')
+                        }
+                    }
+                    else if(Math.abs(click_col + click_row) == 2){
+                        /* 1,1일때 문제가 생김? */
+                        alert(click_col + '+' + click_row + '=' )
+                        if(
+                            rows[0][2].textContent === fill_text &&
+                            rows[1][1].textContent === fill_text &&
+                            rows[2][0].textContent === fill_text
+                        ){
+                            end_game = true;
+                           alert(fill_text + '님이  우>좌 대각선 승리하였습니다')
+                        }
+                    }
 
-            if(
-                //가로줄이 같을때
-                rows[click_col][0].textContent === fill_text &&
-                rows[click_col][1].textContent === fill_text &&
-                rows[click_col][2].textContent === fill_text
-            ){
-                end_game = true;
-            }
-            else if(
-                //세로줄이 같을때
-                rows[0][click_row].textContent === fill_text &&
-                rows[1][click_row].textContent === fill_text &&
-                rows[2][click_row].textContent === fill_text 
-            ){
-                end_game = true;
-            }
-            else if(click_col === click_row && rows[click_col][click_row] === 'X'){
-                end_game = true;
-            }
-
-
-
-            console.log('end_game = ' + end_game);
-
-            if(end_game){
-                alert('게임종료');
-            }
+                }
         }
 
         for(var i=0; i<3; i++){

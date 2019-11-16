@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>주제 빙고</title>
 </head>
 
 <body>
-    <table class="fruit">
+    <style>
+        #subject_table tr td{ width: 100px; height: 100px; border:1px #d8d8d8 solid; text-align: center; }
+    </style>
+
+    <table id="subject_table">
         <tr>
             <td></td>
             <td></td>
@@ -26,16 +30,32 @@
         </tr>
     </table>
 
+    <button id="fruit_btn">Click!</button>
+
     <script>
-        const $ = (selector) => document.querySelector(selector);
-        //nodeList라 push불가.. > 배열로 가져오는법을 찾자
-        var fruit_td =  document.querySelectorAll('.fruit tr td');
-        var fruit_arr = [1,2,3,4,5,6,7,8,9];
+        var fruit_arr = ['사과','멜론','오렌지','귤','포도','망고','라임','딸기','키위'];
+        
 
-        fruit_arr.forEach(function(e){
-            fruit_td.push(e);
-        });
+        var subject_td = document.querySelectorAll('#subject_table td');
+        var subject_td_array = Array.prototype.slice.call(subject_td); // 가져온 TD에 대한 NodeList를 Array로 변환.
 
+        var fruit_btn = document.getElementById('fruit_btn');
+
+
+        fruit_btn.addEventListener('click',function(){ // 담주에 오면 이거를 공통 btn클래스로 묶고 각버튼에 해당하는 주제를 뿌려주도록 변경!
+            var shuffle = [];
+             //셔플에 fruit_arr을 담아서 버튼을 클릭했을 때 셔플을 테이블에 뿌려준다.
+            while(fruit_arr.length > 0){
+                var random = fruit_arr.splice(Math.floor(Math.random()*fruit_arr.length), 1 )[0];
+                shuffle.push(random); 
+            }
+            fruit_arr = shuffle; //배열에 셔플을할당. (while문에 넣어주면 무한반복이 되므로 주의!)
+            //테이블에 랜덤 주제를 뿌려준다
+            for(var i=0 ; i<fruit_arr.length ; i++){
+                subject_td_array[i].textContent = fruit_arr[i];
+            }
+
+            });
     </script>    
 </body>
 </html>

@@ -1,0 +1,41 @@
+섹션0. 끝말잇기
+- var obj =  prompt(변수);
+
+섹션1. 구구단
+Math.random() -> 0이상 ~ 1미만 사이의 랜덤값
+Math.floor() -> 내림처리
+*Math.floor( (Math.random()*9) +1) -> 1~9사이의 랜덤값
+Math.abs() -> 절대값처리
+
+섹션4. 배열
+var arr = new Array(); 
+var arr = [1,2,3];
+-> 배열생성
+
+form.addEventListner('submit',function(){
+   e.preventDefault(); //다른이벤트 삭제
+   
+   input.focus(); //입력 후 input창에 포커스가 맞춰지도록.
+   input.value = ''; //입력 후 input창을 빈칸으로 리셋
+
+}); -> form안의 input창에 Enter키로 입력하기위함.
+
+input.value -> input의 값을 반환
+
+
+String.split('') ->  String객체를 "" 단위로 나눠서 배열로 만들어줌
+arr.slice('') -> 배열을  String으로 변경
+arr.join('') -> 배열안의 원소들을 연결하여 String으로 만들어줌
+arr.indexOf('배열안의값') -> 배열안의 값을 직접 입력해서 그 값의 위치값을 반환 (없는값을 입력하면 -1을 반환)
+
+섹션7. 틱택토
+var fx = function(e){
+   e.target // 클릭했을때 선택된 td
+   e.target.parentNode //클릭했을때 선택된 td의 부모tr
+   indexOf(e.target.parentNode) // tr의 위치번호 (tr이 몇번째 tr인지?)
+}
+
+섹션8. 로또추첨기
+var arr = Array(45).fill().map(function(e,index){ //0~44까지의 값을 맵핑시켜줌.
+   return index+1;
+});

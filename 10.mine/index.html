@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        table{
+            border-collapse : collapse;
+        }
+        td{
+            border: 1px solid black; width:20px; height: 20px; text-align: center;
+        }
+    </style>
+
+    <input type="number" id="hor" placeholder="가로">
+    <input type="number" id="ver" placeholder="세로">
+    <input type="number" id="mine" placeholder="지뢰">
+    <button type="button" id="exec">실행</button>
+
+    <br>
+    
+    <table id="table">
+        <thead>
+            <tr>
+                <td><span id="timer"></span></td>
+            </tr>
+        </thead>
+
+        <br>
+
+        <tbody></tbody>
+    </table>
+
+    <script>
+         var tbody = document.querySelector('#table tbody');
+         var dataSet = [];
+
+        document.querySelector('#exec').addEventListener('click',function(){
+            tbody.innerHTML = ''; //버튼눌릴때마다 초기화
+            var hor = parseInt(document.querySelector('#hor').value);
+            var ver = parseInt(document.querySelector('#ver').value);
+            var mine = parseInt(document.querySelector('#mine').value);
+
+            /* arr에 1~length값을 매핑시켜준다 */
+            var arr = Array(hor * ver).fill().map(function(el,index){
+                return index;
+            });
+            var shuffle = [];
+
+            /* 셔플에 랜덤순서대로 값을 복제*/
+            while(arr.length >80){
+                var move = arr.splice(Math.floor(Math.random() * arr.length), 1)[0];
+                shuffle.push(move);
+            }
+
+
+            //지뢰테이블 생성
+            for(var i=0 ; i<ver ; i++){
+                var table_arr = [];
+                var tr = document.createElement('tr');
+                dataSet.push(table_arr);
+                for(var j=0 ; j<hor ; j++){
+                    table_arr.push(1);
+                    var td = document.createElement('td');
+                    /*td를 만들자마자 이벤트리스너를 걸어줘서 비동기를 동기처럼 사용*/
+                    td.addEventListener('contextmenu',function(e){
+                        e.preventDefault();
+                        // e.target은 실제 이벤트가 발생한요소 /  e.currentTarget은 이벤트리스너가 달린 요소
+                        var par_tr = e.currentTarget.parentNode;
+                        var par_tbody = e.currentTarget.parentNode.parentNode;
+                        //프로토타입을 사용해서 야매로? NodeList를 Array처럼 사용. 
+                        //각 e.target의 부모를 찾아 index값을 반환
+                        var row = Array.prototype.indexOf.call(par_tr.children , e.currentTarget);
+                        var col = Array.prototype.indexOf.call(par_tbody.children , par_tr);
+                        
+                        if(e.currentTarget.textContent =='' || e.currentTarget.textContent =='X' ){
+                            e.currentTarget.textContent='!';
+                        }
+                        else if(e.currentTarget.textContent =='!'){
+                            e.currentTarget.textContent='?';
+                        }
+                        else if(e.currentTarget.textContent =='?'){
+                            e.currentTarget.textContent='';
+                            if(dataSet[col][row] == 1){
+                                e.currentTarget.textContent='';
+                            }else if(dataSet[col][row] == 'X'){
+                                e.currentTarget.textContent='X';
+                            }
+                        }
+                        console.log(dataSet);
+                        
+                    });
+
+
+                    td.addEventListener('click',function(e){
+                        //우클릭시 변수 그대로 갖고옴
+                        e.preventDefault();
+                        var par_tr = e.currentTarget.parentNode;
+                        var par_tbody = e.currentTarget.parentNode.parentNode;
+                        var row = Array.prototype.indexOf.call(par_tr.children , e.currentTarget);
+                        var col = Array.prototype.indexOf.call(par_tbody.children , par_tr);
+
+                        if(dataSet[col][row] == 'X' ){
+                            e.currentTarget.textContent ='펑';
+                        }
+                        else{
+                            //이부분 복습필요...
+                            var around = [
+                                dataSet[col][row-1],dataSet[col][row+1],
+                                ];
+                                if(dataSet[col-1]){
+                                    around = around.concat([ dataSet[col-1][row-1], dataSet[col-1][row], dataSet[col-1][row+1] ]);
+                                }
+                                if(dataSet[col+1]){
+                                    around = around.concat([ dataSet[col+1][row-1], dataSet[col+1][row], dataSet[col+1][row+1] ]);
+                                }
+                                console.log(around);
+                                e.currentTarget.textContent = around.filter(function(v){
+                                    return v == 'X';
+                                }).length;
+                                
+                        }
+                    });
+
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+            /* 지뢰심기 */
+            for(var k =0 ; k<shuffle.length ; k++ ){
+                var height = Math.floor(shuffle[k] / 10);
+                var width = shuffle[k] % 10 ;
+
+                console.log(height, width);
+                tbody.children[height].children[width].textContent = 'X';
+                dataSet[height][width] = 'X';
+            }
+
+            console.log(mine)
+        });
+
+        tbody.querySelectorAll('td').forEach(function(td){
+            td.addEventListener('contextmenu',function(e){
+                e.preventDefault();
+                console.log('우클릭!')
+            });
+        });
+    </script>
+
+</body>
+</html>

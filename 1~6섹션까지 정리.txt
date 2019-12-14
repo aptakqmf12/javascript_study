@@ -39,3 +39,71 @@ var fx = function(e){
 var arr = Array(45).fill().map(function(e,index){ //0~44까지의 값을 맵핑시켜줌.
    return index+1;
 });
+
+ 섹션7. 지뢰찾기
+/*정리중*/
+
+
+섹션7_1 스코프(전역변수, 지역변수)
+- 스코프
+var x = 'global';
+function ex(){
+   var x = 'local';
+   x='change';
+}
+
+ex();
+console.log(x)  //여전히 'global'
+
+- 스코프 체인 -
+var name = 'zero';
+function outer(){
+   console.log('외부', name); //내부 zero
+   function inner(){
+      var enemy = 'nero';
+      console.log('내부', name); //내부 zero
+   }
+   inner();
+}
+outer(); 
+console.log(enemy)//undefined
+
+- 렉시컬 스코프 -
+var name = 'zero';
+function log(){
+   console.log(name); //zero
+}
+
+function wrapper(){
+   var name = 'nero';
+   log();
+}
+
+wrapper();
+
+- 클로저 -
+for( i=0 ; i<100 ; i++){
+   setTimeout(function(){
+      console.log(i);
+   }, i*1000);
+} 
+// '100'만 계속 찍힘
+
+for( i=0 ; i<100 ; i++){
+   function 클로저(j){
+      setTimeout(function(){
+         console.log(j);
+      }, j*1000);   
+   }
+   클로저(i);
+} 
+// 이렇게 클로저 함수로 감싸서 호출하는식으로 바꿔주면 원하는대로 '1,2,3,~99'까지 찍힘
+
+for( i=0 ; i<100 ; i++){
+   (function 클로저(j){
+      setTimeout(function(){
+         console.log(j);
+      }, j*1000);   
+   })(i);
+
+} //이거슨 클로저로해결 + 즉시실행함수로 변경(이렇게 많이 쓰임)

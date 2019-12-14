@@ -1,0 +1,21 @@
+*{margin:0; padding:0; text-decoration: none; list-style: none; font-family: 'Do Hyeon','Jua', sans-serif; font-size:16px; }
+div, table, tr, td{box-sizing: border-box;;}
+
+.selected{ background-color: #ffb72d !important; color:black !important;  }
+.bingo{ background-color: #a5d0f0 !important; }
+.toggle_color{color:#a5d0f0;}
+
+section{width:100%; height: 100vh; background-color: #AC8564; position: relative;}
+section .wrap{width:400px; margin:0 auto; position: absolute; left:50%; top: 50%; transform: translateX(-50%) translateY(-50%);}
+
+section h1{ text-align: center; margin:0 0 20px; font-size:100px; color:#ffb72d; text-shadow: 0px 0px 2px #482B19}
+section .table_border{ border:5px #482B19 solid; border-radius: 10px; width: 100%;;}
+section .table_border  #subject_table{background-color: #482B19; border-spacing: 7px; width:100%;}
+section .table_border  #subject_table tr td{ width: 100px; height: 100px;  background-color:#E5B96E; color : #E5B96E; text-align: center; border-radius: 5px; font-size:24px; transition: all .5s ease;}   
+
+section .btn_group{width:100%; text-align: center; margin-top: 20px;; }
+section .btn_group button.btn{ width:70px; height: 40px; border:none; border-radius: 10px;  background-color:#482B19; cursor:pointer; color:white; transition:all .2s ease-in;   }
+section .btn_group button.btn:hover{background-color:#E5B96E; color:#482B19}
+section .btn_group form{display: inline-block; margin-left:10px;}
+
+section #number_info{margin-top:10px; font-size:20px;}

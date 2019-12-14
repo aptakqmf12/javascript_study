@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>인피니티 스크롤</title>
+    <link rel="stylesheet" href="css/style.css">
+<body> 
+
+
+    <header>
+        Infinity Scroll Test
+    </header>
+
+    <section>
+        <div class="wrap">
+            <ul class='box'>
+                <li><img src="images/1.jpg" alt="img"></li>
+                <li><img src="images/2.jpg" alt="img"></li>
+                <li><img src="images/3.jpg" alt="img"></li>
+                <li><img src="images/4.jpg" alt="img"></li>
+                <li><img src="images/5.jpg" alt="img"></li>
+
+        </div>
+        <div class="pos_info"></div>
+    </section>
+
+    
+    <script>
+
+        var ul_box = document.querySelector('.box'); 
+
+        window.addEventListener('scroll',function(){
+            
+            var br_h = document.body.scrollHeight;
+            var wi_h = window.outerHeight;
+            var sc_h = window.scrollY;
+
+            for(var i=1 ; i<15; i++){
+                if( (br_h - wi_h) < sc_h ){
+                    var new_li = document.createElement('li');
+                    new_li.innerHTML = '<img src="images/' +  i + '.jpg">';
+                    ul_box.appendChild(new_li)
+                }
+                if(i == 16) return;
+            }
+
+            
+
+        });  
+    </script>
+
+</body>
+</html>

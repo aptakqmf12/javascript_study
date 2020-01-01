@@ -1,26 +1,34 @@
-섹션0. 끝말잇기
-- var obj =  prompt(변수);
+ ▶섹션0. 끝말잇기
+- var obj =  prompt(변수); //입력창
 
-섹션1. 구구단
+ ▶섹션1. 구구단
 Math.random() -> 0이상 ~ 1미만 사이의 랜덤값
 Math.floor() -> 내림처리
+Math.ceil() -> 올림처리
 *Math.floor( (Math.random()*9) +1) -> 1~9사이의 랜덤값
 Math.abs() -> 절대값처리
 
-섹션4. 배열
-var arr = new Array(); 
-var arr = [1,2,3];
--> 배열생성
+ ▶섹션2. 웹화면구현
+selector.addEventListener('click',function(){ //클릭이벤트리스너
+	
+});
 
-form.addEventListner('submit',function(){
-   e.preventDefault(); //다른이벤트 삭제
-   
-   input.focus(); //입력 후 input창에 포커스가 맞춰지도록.
-   input.value = ''; //입력 후 input창을 빈칸으로 리셋
+form.addEventListener('submit',function(e){ //엔터로 input에 입력하는 이벤트리스너
+	e.preventDefault(); //이전에 있던 이벤트삭제?
 
-}); -> form안의 input창에 Enter키로 입력하기위함.
+	input.focus(); //엔터후 input에 커서on
+	input.value = ''; //엔터후 input 텍스트삭제 
+});
 
-input.value -> input의 값을 반환
+var tr = document.creatElement('tr'); //tr생성
+table.appendChild(tr) //생성한 tr을 table에 붙임
+
+ ▶섹션3. 숫자야구
+arr.indexOf(value) -> value가 들어있는 arr의 0부터 arr,length-1까지의 위치값. (value가 arr안에 없다면 -1을 반환)
+
+ ▶섹션4. 틱택토
+var arr = new Array(); -> 배열생성
+var arr = [1,2,3]; -> 배열생성
 
 
 String.split('') ->  String객체를 "" 단위로 나눠서 배열로 만들어줌
@@ -28,25 +36,27 @@ arr.slice('') -> 배열을  String으로 변경
 arr.join('') -> 배열안의 원소들을 연결하여 String으로 만들어줌
 arr.indexOf('배열안의값') -> 배열안의 값을 직접 입력해서 그 값의 위치값을 반환 (없는값을 입력하면 -1을 반환)
 
-섹션7. 틱택토
+
 var fx = function(e){
    e.target // 클릭했을때 선택된 td
    e.target.parentNode //클릭했을때 선택된 td의 부모tr
    indexOf(e.target.parentNode) // tr의 위치번호 (tr이 몇번째 tr인지?)
 }
 
-섹션8. 로또추첨기
+ ▶섹션5. 로또추첨기
 var arr = Array(45).fill().map(function(e,index){ //0~44까지의 값을 맵핑시켜줌.
    return index+1;
 });
 
- 섹션7. 지뢰찾기
+ ▶섹션7. 지뢰찾기
 /*정리중*/
 
 
-섹션7_1 스코프(전역변수, 지역변수)
-- 스코프
+ ▶섹션7_1 스코프(전역변수 / 지역변수)
+
+- 스코프 예제
 var x = 'global';
+
 function ex(){
    var x = 'local';
    x='change';
@@ -57,6 +67,7 @@ console.log(x)  //여전히 'global'
 
 - 스코프 체인 -
 var name = 'zero';
+
 function outer(){
    console.log('외부', name); //내부 zero
    function inner(){
@@ -65,11 +76,14 @@ function outer(){
    }
    inner();
 }
+
 outer(); 
-console.log(enemy)//undefined
+
+console.log(enemy) //undefined
 
 - 렉시컬 스코프 -
 var name = 'zero';
+
 function log(){
    console.log(name); //zero
 }
@@ -78,16 +92,15 @@ function wrapper(){
    var name = 'nero';
    log();
 }
-
 wrapper();
 
-- 클로저 -
+- 클로저로 반복문 문제해결 -
 for( i=0 ; i<100 ; i++){
    setTimeout(function(){
       console.log(i);
    }, i*1000);
 } 
-// '100'만 계속 찍힘
+// '100'만 계속 찍히는 문제가 발생
 
 for( i=0 ; i<100 ; i++){
    function 클로저(j){

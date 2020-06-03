@@ -1,2 +1,3 @@
 new브랜치에서 수정
 master브랜치에서도 수정
+master브랜치에서 full받고 다시 수정

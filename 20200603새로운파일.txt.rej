@@ -1,0 +1,7 @@
+diff a/20200603새로운파일.txt b/20200603새로운파일.txt	(rejected hunks)
+@@ -1 +0,2 @@
+-'hello world'
+\ No newline at end of file
++new브랜치에서 수정
++master브랜치에서도 수정
+\ No newline at end of file
